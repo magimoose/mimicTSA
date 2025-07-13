@@ -51,7 +51,6 @@ class ReadmissionReader(Reader):
         
 
     def _read_timeseries(self, ts_filename):
-        print(ts_filename)
         ret = []
         with open(os.path.join(self._dataset_dir, ts_filename), "r") as tsfile:
             header = tsfile.readline().strip().split(',')
@@ -59,7 +58,6 @@ class ReadmissionReader(Reader):
             for line in tsfile:
                 mas = list(map(lambda x: float(x) if x else np.nan, line.strip().split(',')))
                 ret.append(np.array(mas))
-        print(np.stack(ret).dtype)
         return (np.stack(ret), header)
 
     def read_example(self, index):

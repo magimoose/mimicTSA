@@ -1,5 +1,5 @@
 from reader import Reader, ReadmissionReader
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, Sampler
 from torch import tensor, float32, float64, int
 import numpy as np
 
@@ -21,5 +21,18 @@ class MIMICDataset(Dataset):
         X = tensor(X, dtype=float32)
         y = tensor(y, dtype=int)
         return X, y
+    
+class SortedSampler(Sampler):
+    def __init__(self, dataset, lengths, descending=False):
+        self.dataset = dataset
+        self.sorted_indices = sorted(range(len(dataset)), key=lambda i: lengths[i], reverse=descending)
+
+    def __iter__(self):
+        iter(self.sorted_indices)
+
+    def __len__(self):
+        len(self.dataset)
+
+
     
     

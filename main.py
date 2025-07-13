@@ -3,17 +3,15 @@ import bigframes.pandas as bpd
 import pandas as pd
 from torch.utils.data import DataLoader
 from reader import ReadmissionReader
-from dataset import MIMICDataset
+from dataset import MIMICDataset, SortedSampler
 from reader import ReadmissionReader
 
 
-test_reader = ReadmissionReader("/home/magnusjg/1TB/database/readmission/test")
-# train_reader = ReadmissionReader("/home/magnusjg/1TB/database/readmission/train")
+train_reader = ReadmissionReader("/home/magnusjg/1TB/database/readmission/test")
 
-test_dataset = MIMICDataset(test_reader)
-# train_dataset = MIMICDataset(train_reader)
+train_dataset = MIMICDataset(train_reader)
 
-test_loader = DataLoader(test_dataset, batch_size=64, shuffle=True)
-# train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+train_lengths = [len(seq) for seq, _ in train_dataset]
+train_sampler = SortedSampler(train_dataset, train_lengths)
 
-test_features, test_labels = next(iter(test_loader))
+print(iter(train_sampler))
