@@ -9,7 +9,7 @@ import re
 # modified from mimic3-benchmarks
 
 
-def process_partition(args, partition, eps=1e-6, n_hours=48):
+def process_partition(args, partition, eps=1e-6):
     output_dir = os.path.join(args.output_path, partition)
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)

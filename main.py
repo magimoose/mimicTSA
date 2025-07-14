@@ -7,11 +7,16 @@ from dataset import MIMICDataset, SortedSampler
 from reader import ReadmissionReader
 
 
-train_reader = ReadmissionReader("/home/magnusjg/1TB/database/readmission/test")
+test_reader = ReadmissionReader("/home/magnusjg/1TB/database/readmission/test")
 
-train_dataset = MIMICDataset(train_reader)
+test_dataset = MIMICDataset(test_reader)
 
-train_lengths = [len(seq) for seq, _ in train_dataset]
-train_sampler = SortedSampler(train_dataset, train_lengths)
+l = len(test_dataset)
 
-print(iter(train_sampler))
+test_lengths = [(test_dataset[i][0].shape[0], test_dataset[i][2]) for i in range(l)]
+
+test_sampler = SortedSampler(test_dataset, test_lengths)
+
+print(test_sampler)
+
+print(iter(test_sampler))

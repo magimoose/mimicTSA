@@ -14,13 +14,14 @@ class MIMICDataset(Dataset):
         sample = self.reader.read_example(idx)
         X = sample['X']
         y = sample['y']
+        name = sample['name']
 
         X = np.where(X == '', np.nan, X)
         X = np.array(X, dtype=np.float32)
 
         X = tensor(X, dtype=float32)
         y = tensor(y, dtype=int)
-        return X, y
+        return X, y, name
     
 class SortedSampler(Sampler):
     def __init__(self, dataset, lengths, descending=False):

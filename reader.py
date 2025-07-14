@@ -47,8 +47,7 @@ class ReadmissionReader(Reader):
         """
         Reader.__init__(self, dataset_dir, listfile)
         self._data = [line.split(',') for line in self._data]
-        self._data = [(x, int(y)) for (x, y) in self._data]
-        
+        self._data = [(x, int(y)) for (x, y) in self._data]        
 
     def _read_timeseries(self, ts_filename):
         ret = []
@@ -78,6 +77,7 @@ class ReadmissionReader(Reader):
                 Names of the columns. The ordering of the columns is always the same.
             name: Name of the sample.
         """
+        # print(len(self._data))
         if index < 0 or index >= len(self._data):
             raise ValueError("Index must be from 0 (inclusive) to number of lines (exclusive).")
 
