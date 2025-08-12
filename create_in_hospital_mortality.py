@@ -198,7 +198,7 @@ def main():
     parser.add_argument('output_path', type=str, help="Directory where the created data should be stored.")
     parser.add_argument('notes_path', type=str, help="Path to the notes file.")
     args, _ = parser.parse_known_args()
-
+#test
     if not os.path.exists(args.output_path):
         os.makedirs(args.output_path)
 
