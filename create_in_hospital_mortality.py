@@ -196,12 +196,13 @@ def main():
     parser = argparse.ArgumentParser(description="Create data for in-hospital mortality prediction task.")
     parser.add_argument('root_path', type=str, help="Path to root folder containing train and test sets.")
     parser.add_argument('output_path', type=str, help="Directory where the created data should be stored.")
+    parser.add_argument('notes_path', type=str, help="Path to the notes file.")
     args, _ = parser.parse_known_args()
 
     if not os.path.exists(args.output_path):
         os.makedirs(args.output_path)
 
-    df = pd.read_csv('/home/magnusjg/1TB/database/mimic-iii-clinical-database-1.4/NOTEEVENTS.csv')
+    df = pd.read_csv(args.notes_path)
     df.CHARTDATE = pd.to_datetime(df.CHARTDATE)
     df.CHARTTIME = pd.to_datetime(df.CHARTTIME)
     df.STORETIME = pd.to_datetime(df.STORETIME)
